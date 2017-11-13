@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+
 import { RECEIVE_ENTRIES, ADD_ENTRY } from '../actions'
 
 function entries (state = {}, action) {
@@ -17,4 +20,7 @@ function entries (state = {}, action) {
   }
 }
 
-export default entries
+export default combineReducers({
+  form: formReducer,
+  entries
+})

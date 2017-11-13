@@ -6,7 +6,7 @@ import { receiveEntries, addEntry } from '../actions'
 import { getDecks } from '../utils/api'
 import { white } from '../utils/colors'
 import { AppLoading} from 'expo'
-import Deck from '../components/Deck'
+import DeckListItem from '../components/DeckListItem'
 import renderSeparator from '../components/Separator'
 import { } from '../utils/helpers'
 
@@ -27,14 +27,14 @@ class DeckIndex extends React.Component {
   _keyExtractor = (item) => item.title
 
   renderItem = ( {item} ) => (
-    <Deck data={item}/>
+    <DeckListItem data={item}/>
   )
 
   render() {
     const { entries } = this.props
     const { ready } = this.state
 
-    let decks = Object.values(entries)
+    let decks = Object.values(entries['entries'])
 
     if (ready === false) {
       return <AppLoading />

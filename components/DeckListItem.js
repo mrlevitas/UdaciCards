@@ -7,18 +7,19 @@ import TextButton from './TextButton'
 import { addEntry } from '../actions'
 import { removeEntry } from '../utils/api'
 
-export default function Deck ({ data }) {
+export default function DeckListItem ({ data }) {
+
   let cardCount = data.questions.length
   return (
     <ListItem
       containerStyle={{ borderBottomWidth: 0 }}
       title={data.title}
       rightTitle={cardCount.toString()}
-      >
-        <Text>
-          {}
-        </Text>
-    </ListItem>
+      onPress={() => this.props.navigation.navigate(
+        'DeckShow',
+        { entryId: data.title }
+      )}
+      />
   )
 }
 
