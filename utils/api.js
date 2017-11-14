@@ -39,7 +39,7 @@ export function getDeck (key) {
     })
 }
 
-export function submitEntry ({ entry, key }) {
+export function submitEntry ({ key, entry }) {
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
     [key]: entry
   }))
@@ -57,6 +57,7 @@ export function removeEntry (key) {
 }
 
 function formatDecksResults (results) {
+  // AsyncStorage.clear()
   return results === null
     ? setDummyData()
     : JSON.parse(results)
