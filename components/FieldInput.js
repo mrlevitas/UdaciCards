@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import {TextInput ,Text} from 'react-native'
 import { FormLabel, FormInput, FormValidationMessage} from 'react-native-elements'
 import { View } from 'react-native'
-class FieldInput extends Component {
-  // componentDidMount () {
-  //
-  // }
 
+class FieldInput extends Component {
   render(){
     const { input, label, placeholder, name, meta: { touched, error } , refProp} = this.props
     return (

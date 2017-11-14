@@ -57,6 +57,7 @@ export function removeEntry (key) {
 }
 
 function formatDecksResults (results) {
+  // AsyncStorage.clear()
   return results === null
     ? setDummyData()
     : JSON.parse(results)

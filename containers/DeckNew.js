@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { addEntry } from '../actions'
 import { purple, white } from '../utils/colors'
 import { NavigationActions } from 'react-navigation'
-import { Field, reduxForm, submit } from 'redux-form'
+import { Field, reduxForm, reset } from 'redux-form'
 
 
 let validate = (formFields) => {
@@ -31,7 +31,7 @@ function SubmitBtn ({onPress}) {
   )
 }
 
-function createBlankEntry ( { title }) {
+function createBlankEntry ( title ) {
   return (
     {
       title: title,
@@ -42,13 +42,12 @@ function createBlankEntry ( { title }) {
 
 class DeckNew extends Component {
 
-
   submitForm = (newTitle) => {
-
-    const title = newTitle
+    const { title } = newTitle
+    const { dispatch } = this.props
     const entry = createBlankEntry(title)
 
-    this.props.dispatch(addEntry({
+    dispatch(addEntry({
       [title]: entry
     }))
 
@@ -56,6 +55,8 @@ class DeckNew extends Component {
     this.deckFieldRef.clear()
 
     submitEntry({ title, entry  })
+
+    dispatch(reset('deck'))
   }
   // reset = () => {
   //   const key = timeToString()

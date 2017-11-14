@@ -5,26 +5,37 @@ import { connect } from 'react-redux'
 import { receiveEntries, addEntry } from '../actions'
 import { white } from '../utils/colors'
 import { AppLoading} from 'expo'
-// import Deck from '../components/Deck'
-
 
 class DeckShow extends React.Component {
 
-
   render() {
+    const {title} = this.props.deck
+    let cardCount = this.props.deck.questions.length
+
     return(
-      <View>
-        <Text>{this.props.deck}</Text>
+      <View style={styles.container}>
+        <Text>{title}</Text>
+        <Text>Number of cards: {cardCount}</Text>
+
       </View>
-  )
+    )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: white,
+    padding: 15,
+  },
+})
+
 function mapStateToProps (state, { navigation }) {
   const { entryId } = navigation.state.params
 
   return {
     entryId,
-    deck: state[entryId],
+    deck: state['entries'][entryId],
   }
 }
 

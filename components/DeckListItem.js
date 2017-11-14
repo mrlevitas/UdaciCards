@@ -7,7 +7,7 @@ import TextButton from './TextButton'
 import { addEntry } from '../actions'
 import { removeEntry } from '../utils/api'
 
-export default function DeckListItem ({ data }) {
+export default function DeckListItem ({ data, navFun } ) {
 
   let cardCount = data.questions.length
   return (
@@ -15,10 +15,7 @@ export default function DeckListItem ({ data }) {
       containerStyle={{ borderBottomWidth: 0 }}
       title={data.title}
       rightTitle={cardCount.toString()}
-      onPress={() => this.props.navigation.navigate(
-        'DeckShow',
-        { entryId: data.title }
-      )}
+      onPress={navFun}
       />
   )
 }

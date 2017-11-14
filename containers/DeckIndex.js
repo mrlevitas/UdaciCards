@@ -27,7 +27,11 @@ class DeckIndex extends React.Component {
   _keyExtractor = (item) => item.title
 
   renderItem = ( {item} ) => (
-    <DeckListItem data={item}/>
+    <DeckListItem data={item} navFun={() =>
+      this.props.navigation.navigate(
+        'DeckShow',
+        { entryId: item.title }
+      )} />
   )
 
   render() {
