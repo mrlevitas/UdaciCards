@@ -45,6 +45,19 @@ export function submitEntry ({ key, entry }) {
   }))
 }
 
+export function submitCard ({ key, entry }) {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then((results) => {
+      let data = JSON.parse(results)
+      let questions = data[key]['questions'].slice()
+
+      questions.push(entry)
+      data[key]['questions'] = questions
+
+      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+    })
+}
+
 
 export function removeEntry (key) {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)

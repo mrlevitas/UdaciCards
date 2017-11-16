@@ -11,6 +11,8 @@ import devToolsEnhancer from 'remote-redux-devtools'
 import DeckIndex from './containers/DeckIndex'
 import DeckNew from './containers/DeckNew'
 import DeckShow from './containers/DeckShow'
+import DeckQuiz from './containers/DeckQuiz'
+import CardNew from './containers/CardNew'
 
 const logger = store => next => action => {
   console.group(action.type)
@@ -29,8 +31,6 @@ const store = createStore(
     applyMiddleware(logger )
   )
 )
-
-// const store = createStore(reducer, devToolsEnhancer());
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -75,12 +75,24 @@ const Tabs = TabNavigator({
   }
 })
 
+const cardCreateStack = StackNavigator({
+  DeckShow: {
+    screen: DeckShow,
+  },
+  CardNew: {
+    screen: CardNew,
+  },
+  DeckQuiz: {
+    screen: DeckQuiz,
+  }
+},{ headerMode: 'none' })
+
 const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
   },
   DeckShow: {
-    screen: DeckShow,
+    screen: cardCreateStack,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
@@ -88,7 +100,8 @@ const MainNavigator = StackNavigator({
       }
     }
   }
-})
+
+},{headerMode: 'screen'})
 
 export default class App extends React.Component {
   render() {
