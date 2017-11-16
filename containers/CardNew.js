@@ -65,20 +65,11 @@ class CardNew extends Component {
     dispatch(reset('card'))
     this.toDeck()
   }
-  // reset = () => {
-  //   const key = timeToString()
-  //
-  //   this.props.dispatch(addEntry({
-  //     [key]: getDailyReminderValue()
-  //   }))
-  //
-  //   this.toHome()
-  //
-  //   removeEntry(key)
-  // }
+
   toDeck = () => {
-    this.props.navigation.dispatch(NavigationActions.back({key: null}))
+    this.props.navigation.dispatch(NavigationActions.back())
   }
+
   render() {
     const { handleSubmit } = this.props
 
@@ -164,22 +155,9 @@ function mapStateToProps (state, { navigation }) {
   }
 }
 
-
-function mapDispatchToProps (dispatch, { navigation }) {
-  const { entryId } = navigation.state.params
-
-  return {
-    goBack: () => navigation.goBack(),
-  }
-}
-
-export default connect(  mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps)
     (reduxForm({
-    form: 'deck',
+    form: 'card',
     validate
   })
 (CardNew))
-// export default reduxForm({
-//   form: 'card',
-//   validate
-// })(DeckNew)

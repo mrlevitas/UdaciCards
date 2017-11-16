@@ -11,6 +11,7 @@ import devToolsEnhancer from 'remote-redux-devtools'
 import DeckIndex from './containers/DeckIndex'
 import DeckNew from './containers/DeckNew'
 import DeckShow from './containers/DeckShow'
+import DeckQuiz from './containers/DeckQuiz'
 import CardNew from './containers/CardNew'
 
 const logger = store => next => action => {
@@ -80,6 +81,9 @@ const cardCreateStack = StackNavigator({
   },
   CardNew: {
     screen: CardNew,
+  },
+  DeckQuiz: {
+    screen: DeckQuiz,
   }
 },{ headerMode: 'none' })
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity} from 'react-native'
-import { List } from "react-native-elements"
 import { connect } from 'react-redux'
 import { receiveEntries, addEntry } from '../actions'
 import { AppLoading} from 'expo'
@@ -8,7 +7,6 @@ import { purple, white } from '../utils/colors'
 import TextButton from '../components/TextButton'
 
 function AddCardBtn ({onPress }) {
-
   return (
     <TouchableOpacity
       style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
@@ -19,9 +17,6 @@ function AddCardBtn ({onPress }) {
 }
 
 class DeckShow extends React.Component {
-
-
-
 
   render() {
     const {title} = this.props.deck
@@ -38,6 +33,15 @@ class DeckShow extends React.Component {
               { entryId: this.props.entryId }
             )
           }/>
+        <TextButton
+          onPress={ () =>
+          this.props.navigation.navigate(
+            'DeckQuiz',
+            { entryId: this.props.entryId }
+          )}
+          style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+          children="Quiz"/>
+
       </View>
     )
   }
@@ -91,15 +95,6 @@ function mapStateToProps (state, { navigation }) {
   }
 }
 
-function mapDispatchToProps (dispatch, { navigation }) {
-  const { entryId } = navigation.state.params
-
-  return {
-    goBack: () => navigation.goBack(),
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  mapStateToProps
 )(DeckShow)

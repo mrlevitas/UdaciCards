@@ -58,17 +58,7 @@ class DeckNew extends Component {
 
     dispatch(reset('deck'))
   }
-  // reset = () => {
-  //   const key = timeToString()
-  //
-  //   this.props.dispatch(addEntry({
-  //     [key]: getDailyReminderValue()
-  //   }))
-  //
-  //   this.toHome()
-  //
-  //   removeEntry(key)
-  // }
+
   toHome = () => {
     this.props.navigation.dispatch(NavigationActions.back({key: 'DeckNew'}))
   }
