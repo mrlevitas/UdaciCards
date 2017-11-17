@@ -26,7 +26,7 @@ function SubmitBtn ({onPress}) {
     <TouchableOpacity
       style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
       onPress={(newTitle) => onPress(newTitle)}>
-        <Text style={styles.submitBtnText}>SUBMIT</Text>
+        <Text style={styles.submitBtnText}>Create Deck</Text>
     </TouchableOpacity>
   )
 }
@@ -51,16 +51,19 @@ class DeckNew extends Component {
       [title]: entry
     }))
 
-    this.toHome()
-    this.deckFieldRef.clear()
+    submitEntry({ key: title, entry })
 
-    submitEntry({ title, entry  })
+    this.toShow(title)
 
     dispatch(reset('deck'))
+    this.deckFieldRef.clear()
   }
 
-  toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({key: 'DeckNew'}))
+  toShow = (title) => {
+    this.props.navigation.navigate(
+      'DeckShow',
+      { entryId: title }
+    )
   }
   render() {
     const { handleSubmit } = this.props
@@ -130,12 +133,6 @@ const styles = StyleSheet.create({
   },
 })
 
-// export default connect()
-//     (reduxForm({
-//     form: 'deck',
-//     validate
-//   })
-// (DeckNew))
 export default reduxForm({
   form: 'deck',
   validate
