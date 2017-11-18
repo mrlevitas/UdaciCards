@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
+
 import { green, red, white } from '../utils/colors'
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/helpers'
+
 import TextButton from '../components/TextButton'
 import Card from '../components/Card'
 import QuizResults from '../components/QuizResults'
-import { NavigationActions } from 'react-navigation'
 
 function ChoiceBtn ({onPress, choiceStyle, choiceStr }) {
   return (
@@ -22,6 +28,11 @@ class DeckQuiz extends React.Component {
     index: 0,
     correctCount: 0,
     displayAnswer: false
+  }
+
+  componentDidMount() {
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   correct = () => {

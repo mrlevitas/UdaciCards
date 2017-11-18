@@ -13,6 +13,7 @@ import DeckNew from './containers/DeckNew'
 import DeckShow from './containers/DeckShow'
 import DeckQuiz from './containers/DeckQuiz'
 import CardNew from './containers/CardNew'
+import { setLocalNotification } from './utils/helpers'
 
 const logger = store => next => action => {
   console.group(action.type)
@@ -104,6 +105,9 @@ const MainNavigator = StackNavigator({
 },{headerMode: 'screen'})
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>
