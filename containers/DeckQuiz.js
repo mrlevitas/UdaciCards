@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
+
 import { green, red, white } from '../utils/colors'
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/helpers'
+
 import TextButton from '../components/TextButton'
+import Card from '../components/Card'
 import QuizResults from '../components/QuizResults'
 
 function ChoiceBtn ({onPress, choiceStyle, choiceStr }) {
@@ -18,60 +26,94 @@ function ChoiceBtn ({onPress, choiceStyle, choiceStr }) {
 class DeckQuiz extends React.Component {
   state = {
     index: 0,
-    correctCount: 0
+    correctCount: 0,
+    displayAnswer: false
+  }
+
+  componentDidMount() {
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   correct = () => {
     this.setState((prevState) => {
       return {
         index: prevState.index + 1,
-        correctCount: prevState.correctCount + 1
+        correctCount: prevState.correctCount + 1,
+        displayAnswer: false
         }
     })
   }
 
-  incorrect = () =>{
+  incorrect = () => {
     this.setState((prevState) => {
       return {
-        index: prevState.index + 1
+        index: prevState.index + 1,
+        displayAnswer: false
         }
     })
   }
 
-  navBack = () =>{
+  showAnswer = () => {
+    this.setState({
+        displayAnswer: true
+      }
+    )
+  }
+
+  navBack = () => {
     this.setState((prevState) => {
       return {
         index: 0,
-        correctCount: 0
+        correctCount: 0,
+        displayAnswer: false
         }
     })
     this.props.navigation.dispatch(NavigationActions.back())
   }
 
+  resetQuiz = () => {
+    this.setState((prevState) => {
+      return {
+        index: 0,
+        correctCount: 0,
+        displayAnswer: false
+        }
+    })
+  }
+
   render() {
     const { questions } = this.props.deck
-    const { index, correctCount } = this.state
+    const { index, correctCount, displayAnswer } = this.state
     const questionsLength = questions.length
 
     if (index === questionsLength && (questionsLength != 1 || index > 0) )
       return <QuizResults
                 total={questionsLength}
                 correct={correctCount}
-                returnFunction={this.navBack}/>
+                returnFunction={this.navBack}
+                resetQuiz={this.resetQuiz}/>
 
     const qAhash = questions[index]
-    debugger
 
     return(
       <View style={styles.container}>
-        <Text>{(index + 1) + "/" + questionsLength}</Text>
-        <Text style={styles.center}>{qAhash.question}</Text>
+        <Card
+          index={index}
+          correctCount={correctCount}
+          qLength={questionsLength}
+          qHash={qAhash}
+          onPress={this.showAnswer}
+          displayAnswer={displayAnswer}
+        />
         <ChoiceBtn
           onPress={this.correct}
-          choiceStyle={styles.correctBtn}/>
+          choiceStyle={styles.correctBtn}
+          choiceStr="Correct"/>
         <ChoiceBtn
           onPress={this.incorrect}
-          choiceStyle={styles.incorrectBtn}/>
+          choiceStyle={styles.incorrectBtn}
+          choiceStr="Incorrect"/>
       </View>
     )
   }

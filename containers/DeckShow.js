@@ -9,9 +9,9 @@ import TextButton from '../components/TextButton'
 function AddCardBtn ({onPress }) {
   return (
     <TouchableOpacity
-      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+      style={Platform.OS === 'ios' ? styles.iosAddBtn : styles.AndroidAddBtn}
       onPress={() => onPress()}>
-        <Text style={styles.submitBtnText}>Add Card</Text>
+        <Text style={styles.addBtnText}>Add Card</Text>
     </TouchableOpacity>
   )
 }
@@ -58,6 +58,11 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
   },
+  addBtnText: {
+    color: 'black',
+    fontSize: 22,
+    textAlign: 'center',
+  },
   iosSubmitBtn: {
     backgroundColor: purple,
     padding: 10,
@@ -66,11 +71,38 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginRight: 40,
   },
+  iosAddBtn:{
+    backgroundColor: white,
+    borderColor: 'black',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
+    marginBottom: 10,
+  },
   AndroidSubmitBtn: {
     backgroundColor: purple,
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  AndroidAddBtn: {
+    backgroundColor: white,
+    borderColor: 'black',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     height: 45,
     borderRadius: 2,
     alignSelf: 'flex-end',

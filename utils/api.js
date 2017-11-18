@@ -58,17 +58,6 @@ export function submitCard ({ key, entry }) {
     })
 }
 
-
-export function removeEntry (key) {
-  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    .then((results) => {
-      const data = JSON.parse(results)
-      data[key] = undefined
-      delete data[key]
-      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
-    })
-}
-
 function formatDecksResults (results) {
   // AsyncStorage.clear()
   return results === null

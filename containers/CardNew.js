@@ -54,16 +54,16 @@ class CardNew extends Component {
       entry: newData
     }))
 
-    this.cardQuestionRef.clear()
-    this.cardAnswerRef.clear()
-
     submitCard({
       key: entryId,
       entry: newData
     })
 
-    dispatch(reset('card'))
     this.toDeck()
+
+    this.cardQuestionRef.clear()
+    this.cardAnswerRef.clear()
+    dispatch(reset('card'))
   }
 
   toDeck = () => {
