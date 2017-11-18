@@ -2,7 +2,9 @@
 
 A react-native mobile app that allows users to study collections of flashcards. The app will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks.
 
-run `yarn start` to boot app & use guides below to connect VM or device:
+App has been tested on Android emulator.
+
+run `yarn install` and then `yarn start` to boot app & use guides below to connect VM or device:
 
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
