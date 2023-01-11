@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "jest-expo": "^22.0.0",
-    "react-native-scripts": "1.7.0",
+    "jest-expo": "^47.0.1",
+    "react-native-scripts": "2.0.1",
     "react-test-renderer": "16.0.0-beta.5",
     "remote-redux-devtools": "^0.5.12"
   },
@@ -20,9 +20,9 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^22.0.3",
+    "expo": "^47.0.13",
     "react": "16.0.0-beta.5",
-    "react-native": "^0.49.5",
+    "react-native": "^0.70.6",
     "react-native-elements": "^0.18.2",
     "react-navigation": "^1.0.0-beta.19",
     "redux-form": "^7.1.2"
